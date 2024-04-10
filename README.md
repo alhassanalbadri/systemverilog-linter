@@ -25,11 +25,13 @@ The tool operates by applying indentation rules and formatting guidelines to you
 
 ## How It Works
 
-The code linting and formatting tool is implemented using JavaScript. The `indentCode()` function in `script.js` performs the indentation and formatting operations based on predefined rules. These rules ensure consistent formatting across SystemVerilog codebases.
+The tool processes the SystemVerilog code by applying indentation rules and formatting guidelines. It preserves comments and multi-line comments during the formatting process. Module parameters and declarations are indented appropriately, and begin-end blocks and logical blocks (if, else if, case, function, task) are formatted to enhance code organization.
 
-## Compatibility
-
+The formatted code is then displayed in the output area of the HTML interface, ready for use.
 The tool is compatible with modern web browsers and can be easily integrated into your development environment. 
+
+![DEMO](demo/example.png)
+
 
 ## Roadmap
 
