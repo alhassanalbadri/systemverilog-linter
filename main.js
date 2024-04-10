@@ -50,7 +50,7 @@ function indentCode() {
 		}
 
 		const endKeywords = ['end', 'endcase', 'endfunction', 'endtask'];
-		const beginKeywords = ['begin', 'else', 'else if', 'case', 'function', 'task'];
+		const beginKeywords = ['begin', 'if', 'else', 'else if', 'case', 'function', 'task'];
 
 		// Logic for begin-end blocks & logical blocks (if, else if, case, function, task).
 		if (trimmedLine.endsWith('begin')) {
@@ -58,10 +58,13 @@ function indentCode() {
 			indentStack.push(indentCounter);
 			indentCounter++;
 		} else if (endKeywords.some(keyword => trimmedLine.startsWith(keyword))) {
-			indentCounter = indentStack.pop() || 0;  // Pop from stack or reset to 0 if stack is empty
+			indentCounter = indentStack.pop() || 0; // Pop from stack or reset to 0 if stack is empty
 			return indent.repeat(indentCounter) + trimmedLine;
 		} else {
 			if (beginKeywords.some(keyword => trimmedLine.startsWith(keyword))) {
+				if(trimmedLine.startsWith('else if') || trimmedLine.startsWith('else')) {
+					return indent.repeat(indentCounter - 1) + trimmedLine;
+				}
 				indentCounter++;
 			}
 		}
