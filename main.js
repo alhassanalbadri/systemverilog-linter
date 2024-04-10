@@ -1,9 +1,12 @@
 function indentCode() {
-	const indentSize = 4;
-
+	/** User Inputs Start */
+	const indentSize = Math.max(0, parseInt(document.getElementById('indentSize').value)) || 4;
+	const tabStyle = document.getElementById('tabStyle').value;
 	const input = document.getElementById('inputArea').value;
 	const lines = input.split('\n');
+	/** User Inputs End */
 
+	const indent = tabStyle === 'tabs' ? '	' : ' ';
 	let indentCounter = 0;
 	let inMultiLineComment = false;
 	let moduleParams = false;
@@ -21,13 +24,14 @@ function indentCode() {
 			return line;
 		}
 
-		let indentedLine = ' '.repeat(indentCounter * indentSize) + trimmedLine;
+		let indentedLine = indent.repeat(indentCounter * indentSize) + trimmedLine;
 
 		// Make sure the ending bracket of module defn. is on the same line as the module declaration.
-		if ((moduleParams && trimmedLine.endsWith(');'))) {
-			moduleParams = false;
-			return trimmedLine;
-		} else if (moduleParams) {
+		if (moduleParams) {
+			if (trimmedLine.endsWith(');')) {
+				moduleParams = false;
+				return trimmedLine;
+			}
 			return indentedLine;
 		}
 
@@ -53,7 +57,7 @@ function indentCode() {
 		} else if (endKeywords.some(keyword => trimmedLine.startsWith(keyword))) {
 			indentCounter = Math.max(0, indentCounter - 1);
 			// We re-define the indented line here to remove the extra indentation. Since we want the 'end' keywords to be on the same indentation level as the previous block.
-			return ' '.repeat(indentCounter * indentSize) + line;
+			return indent.repeat(indentCounter * indentSize) + line;
 		} else {
 			if (beginKeywords.some(keyword => trimmedLine.startsWith(keyword))) {
 				indentCounter++;
