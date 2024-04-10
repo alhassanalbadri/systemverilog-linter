@@ -21,24 +21,27 @@ function indentCode() {
 			return line;
 		}
 
-		let indentedLine = ' '.repeat(indentCounter * indentSize) + line;
+		let indentedLine = ' '.repeat(indentCounter * indentSize) + trimmedLine;
 
 		// Make sure the ending bracket of module defn. is on the same line as the module declaration.
-		if (moduleParams && trimmedLine.endsWith(');')) {
+		if ((moduleParams && trimmedLine.endsWith(');'))) {
 			moduleParams = false;
 			return trimmedLine;
+		} else if (moduleParams) {
+			return indentedLine;
 		}
 
 		// No indentation for 'endmodule' keyword, return the defn as a trimmed line.
 		if (trimmedLine == 'endmodule') {
+			indentCounter = 0;
 			return trimmedLine;
 		}
 
 		// Indent module parameters.
-		if (trimmedLine.includes('module')) {
-			moduleParams = true;
-			indentCounter++;
-			return indentedLine;
+		if (trimmedLine.startsWith('module')) {
+			moduleParams = !trimmedLine.endsWith(');');
+			indentCounter = 1;
+			return trimmedLine;
 		}
 
 		const endKeywords = ['end', 'endcase', 'endfunction', 'endtask'];
