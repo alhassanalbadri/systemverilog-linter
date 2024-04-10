@@ -1,0 +1,37 @@
+.textarea-container {
+	display: flex;
+	height: 85vh;
+	margin-top: 10px;
+}
+
+textarea {
+	flex: 1;
+	padding: 10px;
+	font-family: monospace;
+	font-size: 16px;
+	resize: none;
+}
+
+#inputArea {
+	margin-right: 5px;
+}
+
+#outputArea {
+	background-color: #f0f0f0;
+}
+
+
+footer {
+	text-align: center;
+	padding: 10px;
+	font-size: 20px;
+}
+
+footer a {
+	margin-right: 10px;
+	color: inherit;
+}
+
+footer a:hover {
+	color: #007bff;
+}
