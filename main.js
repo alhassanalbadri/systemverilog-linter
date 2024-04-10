@@ -6,16 +6,17 @@ function indentCode() {
 	const lines = input.split('\n');
 	/** User Inputs End */
 
-	const indent = tabStyle === 'tabs' ? '	' : ' ';
+	const indent = tabStyle === 'tabs' ? '\t'.repeat(indentSize) : ' '.repeat(indentSize);
 	let indentCounter = 0;
 	let inMultiLineComment = false;
 	let moduleParams = false;
+	let indentStack = [];
 
-	const result = lines.map(line => {
+	const result = lines.map((line, index) => {
 		const trimmedLine = line.trim();
 
-		// Handle comments and multi-line comments (perserve as is.)
-		if (trimmedLine.startsWith('//') || inMultiLineComment) {
+		// Handle multi-line comments (preserve as is.), format single-line comments as per indent.
+		if (inMultiLineComment) {
 			if (trimmedLine.endsWith('*/')) {
 				inMultiLineComment = false;
 			} else if (trimmedLine.startsWith('/*') && !trimmedLine.endsWith('*/')) {
@@ -24,7 +25,7 @@ function indentCode() {
 			return line;
 		}
 
-		let indentedLine = indent.repeat(indentCounter * indentSize) + trimmedLine;
+		let indentedLine = indent.repeat(indentCounter) + trimmedLine;
 
 		// Make sure the ending bracket of module defn. is on the same line as the module declaration.
 		if (moduleParams) {
@@ -41,7 +42,7 @@ function indentCode() {
 			return trimmedLine;
 		}
 
-		// Indent module parameters.
+		// If module, increment indent counter and return the line as is.
 		if (trimmedLine.startsWith('module')) {
 			moduleParams = !trimmedLine.endsWith(');');
 			indentCounter = 1;
@@ -53,11 +54,12 @@ function indentCode() {
 
 		// Logic for begin-end blocks & logical blocks (if, else if, case, function, task).
 		if (trimmedLine.endsWith('begin')) {
+			// Begin is handled seperately as it has a matching end keyword.
+			indentStack.push(indentCounter);
 			indentCounter++;
 		} else if (endKeywords.some(keyword => trimmedLine.startsWith(keyword))) {
-			indentCounter = Math.max(0, indentCounter - 1);
-			// We re-define the indented line here to remove the extra indentation. Since we want the 'end' keywords to be on the same indentation level as the previous block.
-			return indent.repeat(indentCounter * indentSize) + line;
+			indentCounter = indentStack.pop() || 0;  // Pop from stack or reset to 0 if stack is empty
+			return indent.repeat(indentCounter) + trimmedLine;
 		} else {
 			if (beginKeywords.some(keyword => trimmedLine.startsWith(keyword))) {
 				indentCounter++;
