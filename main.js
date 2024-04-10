@@ -2,7 +2,8 @@ function indentCode() {
 	/** User Inputs Start */
 	const indentSize = Math.max(0, parseInt(document.getElementById('indentSize').value)) || 4;
 	const tabStyle = document.getElementById('tabStyle').value;
-	const input = document.getElementById('inputArea').value;
+	let input = document.getElementById('inputArea').value;
+	input = input.replace(/([^\s])\s*(begin|end[\w]*)/gi, '$1\n$2').replace(/(begin|end[\w]*)\s*(\w)/g, '$1\n$2');
 	const lines = input.split('\n');
 	/** User Inputs End */
 
