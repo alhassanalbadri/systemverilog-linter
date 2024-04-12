@@ -1,53 +1,55 @@
-# SystemVerilog Code Linting and Formatting Tool
+# SystemVerilog Linter and Formatter
 
-This repository contains a code linting and formatting tool for SystemVerilog, designed to optimize your development workflow by ensuring code consistency and cleanliness. The tool includes a simple HTML interface for easy usage.
+Welcome to the repository for the SystemVerilog Code Linting and Formatting Tool. This tool is designed to enhance your SystemVerilog development workflow by ensuring your code is clean, consistent, and correctly formatted. Featuring a user-friendly HTML interface, it provides a straightforward way to format and tidy your SystemVerilog code directly in your browser.
 
-## Usage
+## Quick Start
 
-This software is hosted on Github Pages, giving you access to the software without any setup overhead. Click here to visit the hosted website.
+### Hosted Version
+Access the linter and formatter instantly with no setup required through our [GitHub Pages site](https://verilog.alhassan.dev). Simply click the link, paste your code, and start linting and formatting!
 
+### Local Usage
+To run the tool locally:
+1. Clone this repository or download the latest release.
+2. Open `index.html` in your preferred web browser.
+3. Paste or type your SystemVerilog code into the input area.
+4. The tool will automatically format the code and display it in the output area, ready for copying or further editing.
 
-To utilize the code linting and formatting tool on a development environment:
+## Features
 
-1. Open the provided HTML interface (`index.html`) in your web browser.
-2. Enter or paste your SystemVerilog code into the input area.
-3. The formatted code will be automatically displayed in the output area, ready for use.
+This tool automates several aspects of code formatting to improve readability and maintainability of SystemVerilog files:
 
-
-## Functionality
-
-The tool operates by applying indentation rules and formatting guidelines to your SystemVerilog code. Key features currently include:
-
-- **Indentation**: Proper indentation is applied to improve code readability and structure.
-- **Comment Handling**: Comments and multi-line comments are preserved during the formatting process.
-- **Module Definition**: Module parameters and declarations are indented appropriately.
-- **Block Handling**: Begin-end blocks and logical blocks (if, else if, case, function, task) are formatted to enhance code organization.
+- **Indentation**: Automatically adjusts indentation levels according to nested block depth.
+- **Comment Preservation**: Ensures that both inline and block comments are retained without alteration.
+- **Module Formatting**: Handles indentation and formatting for module definitions, parameters, and I/O declarations.
+- **Control Structures**: Formats control structures such as `if`, `else if`, `case`, `function`, and `task` for better clarity and structure.
 
 ## How It Works
 
-The tool processes the SystemVerilog code by applying indentation rules and formatting guidelines. It preserves comments and multi-line comments during the formatting process. Module parameters and declarations are indented appropriately, and begin-end blocks and logical blocks (if, else if, case, function, task) are formatted to enhance code organization.
+The SystemVerilog Linter and Formatter parses the code inputted in the HTML interface, applying a set of predefined rules for indentation and formatting. The process is as follows:
 
-The formatted code is then displayed in the output area of the HTML interface, ready for use.
-The tool is compatible with modern web browsers and can be easily integrated into your development environment. 
+- **Parse Input**: Read the code from the input area.
+- **Apply Formatting Rules**: Execute formatting functions that organize and beautify the code.
+- **Output Formatted Code**: Display the neatly formatted code in the output area for user review.
 
-![DEMO](demo/example.png)
+The tool is designed to work across all modern web browsers and integrates smoothly into any development setup.
 
+![Demo Image](demo/example.png)
 
 ## Roadmap
 
-Here's a roadmap outlining possible enhancements and features:
+Future enhancements planned for the tool include:
 
-- [ ] **Error Detection**: Implement checks to detect common errors and potential bugs in SystemVerilog code.
-- [ ] **Improved HTML Interface**: Enhance the user interface for better usability and accessibility.
-- [ ] **Customization Options**: Introduce user-configurable options to customize linting and formatting rules according to project requirements.
-- [ ] **Documentation Update**: Expand and refine the documentation to provide comprehensive usage guidelines and examples.
-- [ ] **Integration with IDEs**: Explore options for integrating the linting and formatting tool with popular Integrated Development Environments (IDEs) for seamless usage.
-- [ ] **Performance Optimization**: Optimize the code processing algorithms to improve tool performance, particularly for larger codebases. Possibly adding support for multiple files system, acting as a basic IDE. 
+- [ ] **Error Detection**: To catch and highlight syntax errors and common semantic issues.
+- [ ] **Enhanced User Interface**: Revamping the interface to improve user experience and accessibility.
+- [ ] **Customization Features**: Allowing users to set personal preferences for formatting rules.
+- [ ] **Performance Improvements**: Optimizing algorithms to enhance speed and handle larger codebases more effectively.
+- [ ] **IDE Integration**: Facilitating integration with popular IDEs like VSCode or Eclipse.
+- [ ] **Expanded Documentation**: To include detailed examples, usage tips, and best practices.
+
+## Contributing
+
+We encourage contributions from the community! If you have suggestions for improvements, would like to report bugs, or want to contribute features, please feel free to fork the repository and submit a pull request.
 
 ## License
 
-This project is licensed under the [Apache 2.0](LICENSE).
-
----
-
-For more details, refer to the code files provided in this repository. We welcome contributions and feedback from the community to improve and expand the functionality of this tool.
+This project is made available under the [Apache License 2.0](LICENSE).
