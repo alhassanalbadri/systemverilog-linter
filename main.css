@@ -1,26 +1,104 @@
+/* Layout Containers */
 .textarea-container {
 	display: flex;
 	height: 85vh;
 	margin-top: 10px;
 }
 
+.outputArea-container {
+	flex: 1;
+	position: relative;
+}
+
+/* Ensures textarea fills its container */
+.outputArea-container>textarea {
+	height: 100%;
+	background-color: #f0f0f0;
+}
+
+/* Textarea Styling */
 textarea {
 	flex: 1;
 	padding: 10px;
 	font-family: monospace;
 	font-size: 16px;
 	resize: none;
+	width: 100%;
+	border: 1px solid #ccc;
+	background-color: #f0f0f0;
+	line-height: 20px;
+	overflow: auto;
+	min-height: 150px;
+	margin: 0;
 }
 
+/* Specific styling for the input area */
 #inputArea {
 	margin-right: 5px;
 }
 
-#outputArea {
-	background-color: #f0f0f0;
+/* Highlighting Effects */
+.line-highlight {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 20px;
+	background-color: rgba(255, 0, 0, 0.2);
+	/* Allows clicking through to the textarea below */
+	pointer-events: none;
+	/* Ensures layering below text for visibility */
+	z-index: 0;
+}
+
+/* Overlay for error messages allowing interaction through it */
+.error-overlays {
+	pointer-events: none;
+}
+
+/* Individual error overlay settings */
+.error-overlay {
+	position: absolute;
+	height: 20px;
+	width: 100%;
+	background-color: transparent;
+	/* Enables interaction with this element */
+	pointer-events: auto;
+}
+
+/* Tooltip for displaying error messages */
+.tooltip {
+	/* Hidden by default */
+	visibility: hidden;
+	width: auto;
+	/* Semi-transparent background */
+	background-color: rgba(0, 0, 0, 0.8);
+	color: white;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	/* Center horizontally */
+	opacity: 0;
+	/* Smooth transitions */
+	transition: opacity 0.3s, transform 0.3s;
+	/* Disable interaction by default */
+	pointer-events: none;
+}
+
+/* Tooltip visibility on hover */
+.error-overlay:hover .tooltip {
+	visibility: visible;
+	opacity: 1;
+	/* Enable interaction when visible */
+	pointer-events: auto;
 }
 
 
+/* Footer Styling */
 footer {
 	text-align: center;
 	padding: 10px;
@@ -32,6 +110,7 @@ footer a {
 	color: inherit;
 }
 
+/* Footer link hover effect */
 footer a:hover {
 	color: #007bff;
 }

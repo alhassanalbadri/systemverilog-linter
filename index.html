@@ -22,23 +22,31 @@
 <body class="container p-3">
 	<h2 class="text-center mb-3">SystemVerilog Linter</h2>
 	<div class="textarea-container">
-		<textarea id="inputArea" class="form-control" oninput="indentCode()"
-			placeholder="Paste your SystemVerilog code here..."></textarea>
-		<textarea id="outputArea" class="form-control" readonly></textarea>
+		<textarea id="inputArea" class="form-control" oninput="indentCode()" autocomplete="off" autocorrect="off"
+			autocapitalize="off" spellcheck="false" placeholder="Paste your SystemVerilog code here..."></textarea>
+
+
+		<div class="outputArea-container" id="outputAreaContainer">
+			<textarea id="outputArea" class="form-control" readonly></textarea>
+			<!-- FIXME: Overlays and highlights break on scroll & resize -->
+			<div id="errorOverlays" class="error-overlays"></div>
+			<div id="lineHighlights"></div>
+		</div>
+
 	</div>
 
 	<h4 class="mb-3 pt-2">Settings</h4>
 	<div class="row">
-		<div class="col-md-6">
-			<label for="indentSize" class="form-label">Indent Size:</label>
-			<input type="number" class="form-control" id="indentSize" value="4" min="1" max="8" onchange="indentCode()">
-		</div>
 		<div class="col-md-6">
 			<label for="tabStyle" class="form-label">Tab Style:</label>
 			<select class="form-control" id="tabStyle" onchange="indentCode()">
 				<option value="spaces">Spaces</option>
 				<option value="tabs">Tabs</option>
 			</select>
+		</div>
+		<div class="col-md-6">
+			<label for="indentSize" class="form-label">Indent Size:</label>
+			<input type="number" class="form-control" id="indentSize" value="4" min="1" max="8" onchange="indentCode()">
 		</div>
 	</div>
 
